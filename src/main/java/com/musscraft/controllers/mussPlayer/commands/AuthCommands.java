@@ -1,12 +1,12 @@
-package com.musscraft.controllers.MussPlayerController.Commands;
+package com.musscraft.controllers.mussPlayer.commands;
 
 import com.musscraft.Main;
-import com.musscraft.controllers.MussPlayerController.MussPlayerController;
-import com.musscraft.controllers.MussPlayerController.MussPlayerManager;
-import com.musscraft.exceptions.MussPlayerExceptions.MussPlayerNotExistsException;
-import com.musscraft.exceptions.MussPlayerExceptions.MussPlayerNotFoundException;
-import com.musscraft.models.MussPlayer;
-import com.musscraft.repositories.MussPlayerRepository;
+import com.musscraft.controllers.mussPlayer.MussPlayerController;
+import com.musscraft.controllers.mussPlayer.MussPlayerManager;
+import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotExistsException;
+import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotFoundException;
+import com.musscraft.controllers.mussPlayer.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
 import io.github.mrblobman.spigotcommandlib.CommandHandle;
 import io.github.mrblobman.spigotcommandlib.CommandHandler;
 import io.github.mrblobman.spigotcommandlib.args.ArgDescription;

@@ -1,6 +1,6 @@
 package com.musscraft;
 
-import com.musscraft.controllers.MussPlayerController.Commands.AuthCommands;
+import com.musscraft.controllers.mussPlayer.commands.AuthCommands;
 import io.github.mrblobman.spigotcommandlib.registry.CommandLib;
 
 public class CommandManager {

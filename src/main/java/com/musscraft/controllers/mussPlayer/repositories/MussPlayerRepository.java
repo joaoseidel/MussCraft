@@ -1,8 +1,8 @@
-package com.musscraft.repositories;
+package com.musscraft.controllers.mussPlayer.repositories;
 
-import com.musscraft.exceptions.MussPlayerExceptions.MussPlayerNotExistsException;
+import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotExistsException;
 import com.musscraft.database.ConnectionFactory;
-import com.musscraft.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.models.MussPlayer;
 import com.musscraft.utils.PasswordUtils;
 
 import java.sql.*;

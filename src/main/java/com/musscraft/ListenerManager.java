@@ -1,7 +1,7 @@
 package com.musscraft;
 
-import com.musscraft.controllers.MussPlayerController.Listeners.MussPlayerJoinListener;
-import com.musscraft.controllers.MussPlayerController.Listeners.MussPlayerMoveListener;
+import com.musscraft.controllers.mussPlayer.listeners.MussPlayerJoinListener;
+import com.musscraft.controllers.mussPlayer.listeners.MussPlayerMoveListener;
 import org.bukkit.plugin.PluginManager;
 
 public class ListenerManager {

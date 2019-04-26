@@ -1,4 +1,4 @@
-package com.musscraft.models;
+package com.musscraft.controllers.mussPlayer.models;
 
 import java.util.UUID;
 

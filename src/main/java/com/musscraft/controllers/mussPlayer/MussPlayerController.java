@@ -1,8 +1,8 @@
-package com.musscraft.controllers.MussPlayerController;
+package com.musscraft.controllers.mussPlayer;
 
 import com.musscraft.Main;
-import com.musscraft.models.MussPlayer;
-import com.musscraft.repositories.MussPlayerRepository;
+import com.musscraft.controllers.mussPlayer.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
 import com.musscraft.utils.PasswordUtils;
 
 public class MussPlayerController {

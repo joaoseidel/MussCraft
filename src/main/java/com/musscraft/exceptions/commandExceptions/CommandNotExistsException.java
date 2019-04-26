@@ -1,4 +1,4 @@
-package com.musscraft.exceptions.CommandExceptions;
+package com.musscraft.exceptions.commandExceptions;
 
 public class CommandNotExistsException extends Exception {
 }

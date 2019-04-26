@@ -1,6 +1,6 @@
 package com.musscraft;
 
-import com.musscraft.controllers.MussPlayerController.MussPlayerController;
+import com.musscraft.controllers.mussPlayer.MussPlayerController;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
 

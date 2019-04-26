@@ -1,7 +1,7 @@
-package com.musscraft.controllers.MussPlayerController;
+package com.musscraft.controllers.mussPlayer;
 
-import com.musscraft.exceptions.MussPlayerExceptions.MussPlayerNotFoundException;
-import com.musscraft.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotFoundException;
+import com.musscraft.controllers.mussPlayer.models.MussPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

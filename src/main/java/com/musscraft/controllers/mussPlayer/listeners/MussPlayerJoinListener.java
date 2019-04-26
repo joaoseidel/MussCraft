@@ -1,10 +1,10 @@
-package com.musscraft.controllers.MussPlayerController.Listeners;
+package com.musscraft.controllers.mussPlayer.listeners;
 
 import com.musscraft.Main;
-import com.musscraft.controllers.MussPlayerController.MussPlayerController;
-import com.musscraft.controllers.MussPlayerController.MussPlayerManager;
-import com.musscraft.models.MussPlayer;
-import com.musscraft.repositories.MussPlayerRepository;
+import com.musscraft.controllers.mussPlayer.MussPlayerController;
+import com.musscraft.controllers.mussPlayer.MussPlayerManager;
+import com.musscraft.controllers.mussPlayer.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

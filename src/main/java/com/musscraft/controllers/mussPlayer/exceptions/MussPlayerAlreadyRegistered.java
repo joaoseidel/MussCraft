@@ -1,4 +1,4 @@
-package com.musscraft.exceptions.MussPlayerExceptions;
+package com.musscraft.controllers.mussPlayer.exceptions;
 
 public class MussPlayerAlreadyRegistered extends Exception {
     @Override
