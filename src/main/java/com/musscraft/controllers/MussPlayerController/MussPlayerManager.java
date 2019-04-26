@@ -11,15 +11,7 @@ public class MussPlayerManager {
     private List<MussPlayer> loggedMussPlayers = new ArrayList<MussPlayer>();
 
     public MussPlayer findMussPlayerByPlayer(Player player) throws MussPlayerNotFoundException {
-        for (MussPlayer mussPlayer : loggedMussPlayers) {
-            if (mussPlayer.getUsername().equals(player.getName())) {
-                return mussPlayer;
-            }
-        }
-
-        System.out.println(loggedMussPlayers);
-
-        throw new MussPlayerNotFoundException();
+        return findMussPlayerByUsername(player.getName());
     }
 
     public MussPlayer findMussPlayerByUsername(String username) throws MussPlayerNotFoundException {
