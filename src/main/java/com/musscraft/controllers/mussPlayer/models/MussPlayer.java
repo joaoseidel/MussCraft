@@ -1,5 +1,7 @@
 package com.musscraft.controllers.mussPlayer.models;
 
+import org.bukkit.Location;
+
 import java.util.UUID;
 
 public class MussPlayer {
@@ -12,6 +14,7 @@ public class MussPlayer {
     private Double experience;
     private boolean logged;
     private boolean registered;
+    private Location location;
 
     public MussPlayer() {
 
@@ -83,16 +86,24 @@ public class MussPlayer {
         this.logged = logged;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
     public boolean isRegistered() {
         return registered;
     }
 
     public void setRegistered(boolean registered) {
         this.registered = registered;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

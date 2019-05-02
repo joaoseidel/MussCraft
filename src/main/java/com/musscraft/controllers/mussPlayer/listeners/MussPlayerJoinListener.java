@@ -29,6 +29,8 @@ public class MussPlayerJoinListener implements Listener {
         Player player = e.getPlayer();
         String playerName = player.getName();
 
+        mussPlayerController.prepareLoginSpawn(player);
+
         MussPlayer mussPlayer = new MussPlayer(playerName);
 
         if (!mussPlayerRepository.exists(playerName)) {

@@ -18,7 +18,8 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-
+        ListenerManager listenerManager = new ListenerManager(this);
+        listenerManager.unregisterAll();
     }
 
     public MussPlayerController getMussPlayerController() {

@@ -1,9 +1,9 @@
 package com.musscraft.controllers.mussPlayer.repositories;
 
 import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotExistsException;
-import com.musscraft.database.ConnectionFactory;
 import com.musscraft.controllers.mussPlayer.models.MussPlayer;
-import com.musscraft.utils.PasswordUtils;
+import com.musscraft.database.ConnectionFactory;
+import com.musscraft.utils.LocationSerializer;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class MussPlayerRepository {
 
             preparedStatement.setString(1, mussPlayerUUID.toString());
             preparedStatement.setString(2, mussPlayer.getUsername());
-            preparedStatement.setString(3, PasswordUtils.hashPassword(mussPlayer.getPassword()));
+            preparedStatement.setString(3, mussPlayer.getPassword());
             preparedStatement.setString(4, mussPlayer.getEmail());
             preparedStatement.setDouble(5, mussPlayer.getMoney());
             preparedStatement.setDouble(6, mussPlayer.getExperience());
@@ -65,6 +65,9 @@ public class MussPlayerRepository {
                 mussPlayer.setEmail(resultSet.getString("email"));
                 mussPlayer.setMoney(resultSet.getDouble("money"));
                 mussPlayer.setExperience(resultSet.getDouble("experience"));
+                mussPlayer.setLocation(
+                        LocationSerializer.getDeserializedLocation(resultSet.getString("location"))
+                );
 
                 return mussPlayer;
             }
@@ -123,6 +126,27 @@ public class MussPlayerRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void saveOrUpdate(MussPlayer mussPlayer) {
+        String sql = createSql("UPDATE _TABLE_ SET username=?, password=?, email=?, money=?, experience=?, logged=?, location=? WHERE UID=?");
+
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, mussPlayer.getUsername());
+            preparedStatement.setString(2, mussPlayer.getPassword());
+            preparedStatement.setString(3, mussPlayer.getEmail());
+            preparedStatement.setDouble(4, mussPlayer.getMoney());
+            preparedStatement.setDouble(5, mussPlayer.getExperience());
+            preparedStatement.setBoolean(6, mussPlayer.isLogged());
+            preparedStatement.setString(7, LocationSerializer.serializeLocation(mussPlayer.getLocation()));
+            preparedStatement.setString(8, mussPlayer.getUid().toString());
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

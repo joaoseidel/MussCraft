@@ -10,8 +10,14 @@ import java.util.List;
 public class MussPlayerManager {
     private List<MussPlayer> loggedMussPlayers = new ArrayList<MussPlayer>();
 
-    public MussPlayer findMussPlayerByPlayer(Player player) throws MussPlayerNotFoundException {
-        return findMussPlayerByUsername(player.getName());
+    public MussPlayer findMussPlayerByPlayer(Player player) {
+        MussPlayer mussPlayer = null;
+        try {
+            mussPlayer = findMussPlayerByUsername(player.getName());
+        } catch (MussPlayerNotFoundException e) {
+            e.printStackTrace();
+        }
+        return mussPlayer;
     }
 
     public MussPlayer findMussPlayerByUsername(String username) throws MussPlayerNotFoundException {
@@ -25,6 +31,9 @@ public class MussPlayerManager {
     }
 
     public void add(MussPlayer mussPlayer) {
+        mussPlayer.setUsername(
+                mussPlayer.getUsername().toLowerCase()
+        );
         loggedMussPlayers.add(mussPlayer);
     }
 

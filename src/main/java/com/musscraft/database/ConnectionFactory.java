@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     public Connection getConnection() {
         try {
-            String host = "jdbc:mysql://localhost/musscraft";
+            String host = "jdbc:mysql://localhost/MussCraft";
             String user = "root";
             String pass = "root";
             Connection connection = DriverManager

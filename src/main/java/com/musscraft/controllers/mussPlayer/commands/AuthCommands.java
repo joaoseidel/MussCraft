@@ -4,7 +4,6 @@ import com.musscraft.Main;
 import com.musscraft.controllers.mussPlayer.MussPlayerController;
 import com.musscraft.controllers.mussPlayer.MussPlayerManager;
 import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotExistsException;
-import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotFoundException;
 import com.musscraft.controllers.mussPlayer.models.MussPlayer;
 import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
 import io.github.mrblobman.spigotcommandlib.CommandHandle;
@@ -25,9 +24,9 @@ public class AuthCommands implements CommandHandler {
     }
 
     @CommandHandle(
-            command = {"login|lo"},
+            command = {"logar"},
             description = "Faz login no servidor",
-            permission = "musscraft.mussplayer.login"
+            permission = "musscraft.auth.login"
     )
     public void login(
             Player player,
@@ -43,16 +42,20 @@ public class AuthCommands implements CommandHandler {
                 player.sendMessage("Senha errada!");
                 return;
             }
-            player.sendMessage("Logado com sucesso!");
+
+            mussPlayerController.doLoginSpawn(player);
+            player.sendMessage(
+                    ChatColor.translateAlternateColorCodes('&', "&bLogado com sucesso!")
+            );
         } catch (MussPlayerNotExistsException e) {
             e.printStackTrace();
         }
     }
 
     @CommandHandle(
-            command = {"register|registrar"},
+            command = {"registrar"},
             description = "Se registra no servidor.",
-            permission = "musscraft.mussplayer.register"
+            permission = "musscraft.auth.register"
     )
     public void register(
             Player player,
@@ -70,12 +73,9 @@ public class AuthCommands implements CommandHandler {
             return;
         }
 
-        try {
-            MussPlayer mussPlayer = mussPlayerManager.findMussPlayerByPlayer(player);
-            mussPlayerController.registerMussPlayer(mussPlayer, password, email);
-        } catch (MussPlayerNotFoundException e) {
-            e.printStackTrace();
-        }
+        MussPlayer mussPlayer = mussPlayerManager.findMussPlayerByPlayer(player);
+        mussPlayerController.registerMussPlayer(mussPlayer, password, email);
+        mussPlayerController.doLoginSpawn(player);
 
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&aVocê se registrou com sucesso!")
@@ -83,11 +83,21 @@ public class AuthCommands implements CommandHandler {
     }
 
     @CommandHandle(
-            command = {"changepassword|trocarsenha"},
+            command = {"trocarsenha"},
             description = "Altera sua senha",
-            permission = "musscraft.mussplayer.changepassword"
+            permission = "musscraft.auth.changepassword"
     )
     public void changePass(Player player, String oldPassword, String newPassword) {
+        try {
+            MussPlayer mussPlayer = mussPlayerManager.findMussPlayerByPlayer(player);
+            mussPlayerController.changeMussPlayerPassword(mussPlayer, oldPassword, newPassword);
+        } catch (Exception e) {
+            player.sendMessage(e.getMessage());
+            return;
+        }
 
+        player.sendMessage(
+                ChatColor.translateAlternateColorCodes('&', "&bVocê alterou sua senha com sucesso.")
+        );
     }
 }
