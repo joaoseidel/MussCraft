@@ -27,11 +27,13 @@ public class MussPlayerQuitListener implements Listener {
 
         Player player = e.getPlayer();
         MussPlayer mussPlayer = mussPlayerManager.findMussPlayerByPlayer(player);
+
         if (mussPlayer.isLogged() && mussPlayer.isRegistered()) {
             mussPlayer.setLogged(false);
             mussPlayer.setLocation(player.getLocation());
             mussPlayerRepository.saveOrUpdate(mussPlayer);
-            mussPlayerManager.remove(mussPlayer);
         }
+
+        mussPlayerManager.remove(mussPlayer);
     }
 }

@@ -32,6 +32,7 @@ public class MussPlayerJoinListener implements Listener {
         mussPlayerController.prepareLoginSpawn(player);
 
         MussPlayer mussPlayer = new MussPlayer(playerName);
+        mussPlayerManager.add(mussPlayer);
 
         if (!mussPlayerRepository.exists(playerName)) {
             player.sendMessage(
@@ -39,7 +40,6 @@ public class MussPlayerJoinListener implements Listener {
             );
 
             mussPlayer.setRegistered(false);
-            mussPlayerManager.add(mussPlayer);
             return;
         }
 

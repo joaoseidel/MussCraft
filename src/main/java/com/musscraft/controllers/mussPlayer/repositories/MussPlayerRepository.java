@@ -1,156 +1,109 @@
 package com.musscraft.controllers.mussPlayer.repositories;
 
-import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotExistsException;
+import com.musscraft.Main;
 import com.musscraft.controllers.mussPlayer.models.MussPlayer;
-import com.musscraft.database.ConnectionFactory;
+import com.musscraft.database.jOOQ.tables.records.MussplayerRecord;
 import com.musscraft.utils.LocationSerializer;
+import org.jooq.DSLContext;
+import org.jooq.Result;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static com.musscraft.database.jOOQ.tables.Mussplayer.MUSSPLAYER;
+import static org.jooq.impl.DSL.select;
+
+
 public class MussPlayerRepository {
-    private static final String MUSS_PLAYERS_TABLE = "MussPlayers";
+    private DSLContext create;
 
-    private Connection connection;
-
-    public MussPlayerRepository() {
-        this.connection = new ConnectionFactory().getConnection();
+    public MussPlayerRepository(Main plugin) {
+        this.create = plugin.getConnectionFactory().getContext();
     }
 
     public MussPlayer add(MussPlayer mussPlayer) {
-        String sql = createSql("INSERT INTO _TABLE_(UID, username, password, email, money, experience, logged)" +
-                "VALUES (?,?,?,?,?,?,?);");
+        MussplayerRecord mussplayerRecord = create.newRecord(MUSSPLAYER);
 
-        UUID mussPlayerUUID = UUID.randomUUID();
+        mussPlayer.setUid(UUID.randomUUID());
 
-        try {
-            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+        mussplayerRecord.setUid(mussPlayer.getUid().toString());
+        mussplayerRecord.setUsername(mussPlayer.getUsername());
+        mussplayerRecord.setPassword(mussPlayer.getPassword());
+        mussplayerRecord.setEmail(mussPlayer.getEmail());
+        mussplayerRecord.store();
 
-            preparedStatement.setString(1, mussPlayerUUID.toString());
-            preparedStatement.setString(2, mussPlayer.getUsername());
-            preparedStatement.setString(3, mussPlayer.getPassword());
-            preparedStatement.setString(4, mussPlayer.getEmail());
-            preparedStatement.setDouble(5, mussPlayer.getMoney());
-            preparedStatement.setDouble(6, mussPlayer.getExperience());
-            preparedStatement.setBoolean(7, mussPlayer.isLogged());
-
-            preparedStatement.executeUpdate();
-
-            mussPlayer.setUid(mussPlayerUUID);
-
-            return mussPlayer;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return mussPlayer;
     }
 
-    public MussPlayer get(String username) throws MussPlayerNotExistsException {
-        String sql = createSql("SELECT * FROM _TABLE_ WHERE username = ?");
+    public MussPlayer get(String username) {
+        MussplayerRecord mussplayerRecord = create.selectFrom(MUSSPLAYER)
+                .where(MUSSPLAYER.USERNAME.eq(username))
+                .fetchOne();
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, username);
-            preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-
-            while (resultSet.next()) {
-                MussPlayer mussPlayer = new MussPlayer(username);
-
-                mussPlayer.setUid(UUID.fromString(resultSet.getString("UID")));
-                mussPlayer.setUsername(resultSet.getString("username"));
-                mussPlayer.setPassword(resultSet.getString("password"));
-                mussPlayer.setEmail(resultSet.getString("email"));
-                mussPlayer.setMoney(resultSet.getDouble("money"));
-                mussPlayer.setExperience(resultSet.getDouble("experience"));
-                mussPlayer.setLocation(
-                        LocationSerializer.getDeserializedLocation(resultSet.getString("location"))
-                );
-
-                return mussPlayer;
-            }
-
-            throw new MussPlayerNotExistsException();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return fillMussPlayer(mussplayerRecord);
     }
 
-    public List<MussPlayer> getAll() throws MussPlayerNotExistsException {
-        List<MussPlayer> listAllMussPlayers = new ArrayList<MussPlayer>();
-        String sql = createSql("SELECT * FROM _TABLE_");
+    public List<MussPlayer> getAll() {
+        Result<MussplayerRecord> fetch = create.selectFrom(MUSSPLAYER)
+                .orderBy(MUSSPLAYER.USERNAME)
+                .fetch();
 
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                listAllMussPlayers.add(get(resultSet.getString("username")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return listAllMussPlayers;
+        List<MussPlayer> mussPlayerList = new ArrayList<>(fetch.size());
+        fetch.forEach(record -> mussPlayerList.add(fillMussPlayer(record)));
+        return mussPlayerList;
     }
 
     public boolean exists(String username) {
-        String sql = createSql("SELECT * FROM _TABLE_ WHERE username = ?");
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, username);
-            preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-
-            while (resultSet.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
+        return create.fetchExists(
+                select()
+                        .from(MUSSPLAYER)
+                        .where(MUSSPLAYER.USERNAME.eq(username)));
     }
 
-    public void remove(MussPlayer mussPlayer) throws MussPlayerNotExistsException {
-        if (!exists(mussPlayer.getUsername()))
-            throw new MussPlayerNotExistsException();
-
-        String sql = createSql("DELETE FROM _TABLE_ WHERE UID = ?");
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, mussPlayer.getUid().toString());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public void remove(MussPlayer mussPlayer) {
+        if (exists(mussPlayer.getUsername())) {
+            create.delete(MUSSPLAYER)
+                    .where(MUSSPLAYER.UID.eq(mussPlayer.getUid().toString()))
+                    .execute();
         }
     }
 
     public void saveOrUpdate(MussPlayer mussPlayer) {
-        String sql = createSql("UPDATE _TABLE_ SET username=?, password=?, email=?, money=?, experience=?, logged=?, location=? WHERE UID=?");
-
-        try {
-            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, mussPlayer.getUsername());
-            preparedStatement.setString(2, mussPlayer.getPassword());
-            preparedStatement.setString(3, mussPlayer.getEmail());
-            preparedStatement.setDouble(4, mussPlayer.getMoney());
-            preparedStatement.setDouble(5, mussPlayer.getExperience());
-            preparedStatement.setBoolean(6, mussPlayer.isLogged());
-            preparedStatement.setString(7, LocationSerializer.serializeLocation(mussPlayer.getLocation()));
-            preparedStatement.setString(8, mussPlayer.getUid().toString());
-
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (!exists(mussPlayer.getUsername())) {
+            add(mussPlayer);
+            return;
         }
+
+        MussplayerRecord mussplayerRecord = create.selectFrom(MUSSPLAYER)
+                .where(MUSSPLAYER.USERNAME.eq(mussPlayer.getUsername()))
+                .fetchOne();
+
+        fillMussPlayer(mussplayerRecord, mussPlayer).update();
     }
 
-    public String createSql(String sql) {
-        return sql.replaceAll("_TABLE_", MUSS_PLAYERS_TABLE);
+
+    private MussPlayer fillMussPlayer(MussplayerRecord record) {
+        MussPlayer mussPlayer = new MussPlayer(record.getUsername())
+                .setUid(UUID.fromString(record.getUid()))
+                .setPassword(record.getPassword())
+                .setEmail(record.getEmail())
+                .setMoney(record.getMoney())
+                .setExperience(record.getExperience())
+                .setLogged(record.getLogged().intValue() == 1 ? (Boolean.TRUE) : (Boolean.FALSE))
+                .setLocation(LocationSerializer.getDeserializedLocation(record.getLocation()));
+        return mussPlayer;
+    }
+
+    private MussplayerRecord fillMussPlayer(MussplayerRecord mussplayerRecord, MussPlayer mussPlayer) {
+        mussplayerRecord.setUid(mussPlayer.getUid().toString());
+        mussplayerRecord.setUsername(mussPlayer.getUsername());
+        mussplayerRecord.setPassword(mussPlayer.getPassword());
+        mussplayerRecord.setEmail(mussPlayer.getEmail());
+        mussplayerRecord.setMoney(mussPlayer.getMoney());
+        mussplayerRecord.setExperience(mussPlayer.getExperience());
+        mussplayerRecord.setLocation(LocationSerializer.serializeLocation(mussPlayer.getLocation()));
+        mussplayerRecord.setLogged((byte) (mussPlayer.isLogged() ? 1 : 0));
+        return mussplayerRecord;
     }
 }

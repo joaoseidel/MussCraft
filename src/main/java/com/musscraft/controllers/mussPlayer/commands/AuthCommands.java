@@ -3,7 +3,6 @@ package com.musscraft.controllers.mussPlayer.commands;
 import com.musscraft.Main;
 import com.musscraft.controllers.mussPlayer.MussPlayerController;
 import com.musscraft.controllers.mussPlayer.MussPlayerManager;
-import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotExistsException;
 import com.musscraft.controllers.mussPlayer.models.MussPlayer;
 import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
 import io.github.mrblobman.spigotcommandlib.CommandHandle;
@@ -35,21 +34,17 @@ public class AuthCommands implements CommandHandler {
                     description = "Sua senha de login"
             ) String password
     ) {
-        try {
-            MussPlayer mussPlayer = mussPlayerRepository.get(player.getName());
+        MussPlayer mussPlayer = mussPlayerRepository.get(player.getName());
 
-            if (!mussPlayerController.attempLogin(mussPlayer, password)) {
-                player.sendMessage("Senha errada!");
-                return;
-            }
-
-            mussPlayerController.doLoginSpawn(player);
-            player.sendMessage(
-                    ChatColor.translateAlternateColorCodes('&', "&bLogado com sucesso!")
-            );
-        } catch (MussPlayerNotExistsException e) {
-            e.printStackTrace();
+        if (!mussPlayerController.attempLogin(mussPlayer, password)) {
+            player.sendMessage("Senha errada!");
+            return;
         }
+
+        mussPlayerController.doLoginSpawn(player);
+        player.sendMessage(
+                ChatColor.translateAlternateColorCodes('&', "&bLogado com sucesso!")
+        );
     }
 
     @CommandHandle(
