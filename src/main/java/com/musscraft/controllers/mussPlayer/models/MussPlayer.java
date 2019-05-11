@@ -5,7 +5,6 @@ import org.bukkit.Location;
 import java.util.UUID;
 
 public class MussPlayer {
-
     private UUID uid;
     private String username;
     private String password;
@@ -16,17 +15,11 @@ public class MussPlayer {
     private boolean registered;
     private Location location;
 
-    public MussPlayer() {
-
-    }
-
     public MussPlayer(UUID uuid) {
-        this();
         setUid(uuid);
     }
 
     public MussPlayer(String username) {
-
         setUsername(username);
     }
 
@@ -34,72 +27,81 @@ public class MussPlayer {
         return uid;
     }
 
-    public void setUid(UUID uid) {
+    public MussPlayer setUid(UUID uid) {
         this.uid = uid;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public MussPlayer setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public MussPlayer setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public MussPlayer setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Double money) {
+    public MussPlayer setMoney(Double money) {
         this.money = money;
+        return this;
     }
 
     public Double getExperience() {
         return experience;
     }
 
-    public void setExperience(Double experience) {
+    public MussPlayer setExperience(Double experience) {
         this.experience = experience;
+        return this;
     }
 
     public boolean isLogged() {
         return logged;
     }
 
-    public void setLogged(boolean logged) {
+    public MussPlayer setLogged(Boolean logged) {
         this.logged = logged;
+        return this;
     }
 
     public boolean isRegistered() {
         return registered;
     }
 
-    public void setRegistered(boolean registered) {
+    public MussPlayer setRegistered(boolean registered) {
         this.registered = registered;
+        return this;
     }
 
     public Location getLocation() {
         return this.location;
     }
 
-    public void setLocation(Location location) {
+    public MussPlayer setLocation(Location location) {
         this.location = location;
+        return this;
     }
 
     @Override

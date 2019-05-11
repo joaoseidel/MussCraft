@@ -18,7 +18,7 @@ public class MussPlayerController {
     public MussPlayerController(Main plugin) {
         this.plugin = plugin;
         this.mussPlayerManager = new MussPlayerManager();
-        this.mussPlayerRepository = new MussPlayerRepository();
+        this.mussPlayerRepository = new MussPlayerRepository(plugin);
     }
 
     public MussPlayerManager getMussPlayerManager() {
@@ -36,6 +36,7 @@ public class MussPlayerController {
         mussPlayer.setExperience(0.0);
         mussPlayer.setLogged(true);
         mussPlayer.setRegistered(true);
+        mussPlayer.setLocation(Bukkit.getWorld("world").getSpawnLocation());
 
         mussPlayerRepository.add(mussPlayer);
         mussPlayerManager.saveOrUpdate(mussPlayer);
