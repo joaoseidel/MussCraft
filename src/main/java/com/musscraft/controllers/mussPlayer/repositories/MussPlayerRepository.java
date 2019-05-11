@@ -16,14 +16,14 @@ import static org.jooq.impl.DSL.select;
 
 
 public class MussPlayerRepository {
-    private DSLContext create;
+    private DSLContext context;
 
     public MussPlayerRepository(Main plugin) {
-        this.create = plugin.getConnectionFactory().getContext();
+        this.context = plugin.getConnectionFactory().getContext();
     }
 
     public MussPlayer add(MussPlayer mussPlayer) {
-        MussplayerRecord mussplayerRecord = create.newRecord(MUSSPLAYER);
+        MussplayerRecord mussplayerRecord = context.newRecord(MUSSPLAYER);
 
         mussPlayer.setUid(UUID.randomUUID());
 
@@ -37,7 +37,7 @@ public class MussPlayerRepository {
     }
 
     public MussPlayer get(String username) {
-        MussplayerRecord mussplayerRecord = create.selectFrom(MUSSPLAYER)
+        MussplayerRecord mussplayerRecord = context.selectFrom(MUSSPLAYER)
                 .where(MUSSPLAYER.USERNAME.eq(username))
                 .fetchOne();
 
@@ -45,7 +45,7 @@ public class MussPlayerRepository {
     }
 
     public List<MussPlayer> getAll() {
-        Result<MussplayerRecord> fetch = create.selectFrom(MUSSPLAYER)
+        Result<MussplayerRecord> fetch = context.selectFrom(MUSSPLAYER)
                 .orderBy(MUSSPLAYER.USERNAME)
                 .fetch();
 
@@ -55,27 +55,20 @@ public class MussPlayerRepository {
     }
 
     public boolean exists(String username) {
-        return create.fetchExists(
+        return context.fetchExists(
                 select()
                         .from(MUSSPLAYER)
                         .where(MUSSPLAYER.USERNAME.eq(username)));
     }
 
     public void remove(MussPlayer mussPlayer) {
-        if (exists(mussPlayer.getUsername())) {
-            create.delete(MUSSPLAYER)
-                    .where(MUSSPLAYER.UID.eq(mussPlayer.getUid().toString()))
-                    .execute();
-        }
+        context.delete(MUSSPLAYER)
+                .where(MUSSPLAYER.UID.eq(mussPlayer.getUid().toString()))
+                .execute();
     }
 
     public void saveOrUpdate(MussPlayer mussPlayer) {
-        if (!exists(mussPlayer.getUsername())) {
-            add(mussPlayer);
-            return;
-        }
-
-        MussplayerRecord mussplayerRecord = create.selectFrom(MUSSPLAYER)
+        MussplayerRecord mussplayerRecord = context.selectFrom(MUSSPLAYER)
                 .where(MUSSPLAYER.USERNAME.eq(mussPlayer.getUsername()))
                 .fetchOne();
 
@@ -84,7 +77,7 @@ public class MussPlayerRepository {
 
 
     private MussPlayer fillMussPlayer(MussplayerRecord record) {
-        MussPlayer mussPlayer = new MussPlayer(record.getUsername())
+        return new MussPlayer(record.getUsername())
                 .setUid(UUID.fromString(record.getUid()))
                 .setPassword(record.getPassword())
                 .setEmail(record.getEmail())
@@ -92,7 +85,6 @@ public class MussPlayerRepository {
                 .setExperience(record.getExperience())
                 .setLogged(record.getLogged().intValue() == 1 ? (Boolean.TRUE) : (Boolean.FALSE))
                 .setLocation(LocationSerializer.getDeserializedLocation(record.getLocation()));
-        return mussPlayer;
     }
 
     private MussplayerRecord fillMussPlayer(MussplayerRecord mussplayerRecord, MussPlayer mussPlayer) {

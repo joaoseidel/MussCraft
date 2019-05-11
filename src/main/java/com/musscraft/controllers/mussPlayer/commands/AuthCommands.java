@@ -3,8 +3,8 @@ package com.musscraft.controllers.mussPlayer.commands;
 import com.musscraft.Main;
 import com.musscraft.controllers.mussPlayer.MussPlayerController;
 import com.musscraft.controllers.mussPlayer.MussPlayerManager;
-import com.musscraft.controllers.mussPlayer.repositories.models.MussPlayer;
 import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
+import com.musscraft.controllers.mussPlayer.repositories.models.MussPlayer;
 import com.musscraft.utils.PasswordUtils;
 import io.github.mrblobman.spigotcommandlib.CommandHandle;
 import io.github.mrblobman.spigotcommandlib.CommandHandler;
@@ -45,7 +45,7 @@ public class AuthCommands implements CommandHandler {
             return;
         }
 
-        doLoginSpawn(player);
+        doLoginSpawn(mussPlayer, player);
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&bLogado com sucesso!")
         );
@@ -74,7 +74,7 @@ public class AuthCommands implements CommandHandler {
 
         MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player);
         registerMussPlayer(mussPlayer, password, email);
-        doLoginSpawn(player);
+        doLoginSpawn(mussPlayer, player);
 
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&aVocê se registrou com sucesso!")
@@ -141,9 +141,7 @@ public class AuthCommands implements CommandHandler {
         mussPlayerRepository.saveOrUpdate(mussPlayer);
     }
 
-    private void doLoginSpawn(Player player) {
-        MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player);
-
+    private void doLoginSpawn(MussPlayer mussPlayer, Player player) {
         player.setAllowFlight(false);
         player.setFlying(false);
         player.setGameMode(GameMode.SURVIVAL);
