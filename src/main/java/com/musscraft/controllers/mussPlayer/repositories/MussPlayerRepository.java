@@ -1,7 +1,7 @@
 package com.musscraft.controllers.mussPlayer.repositories;
 
 import com.musscraft.Main;
-import com.musscraft.controllers.mussPlayer.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.repositories.models.MussPlayer;
 import com.musscraft.database.jOOQ.tables.records.MussplayerRecord;
 import com.musscraft.utils.LocationSerializer;
 import org.jooq.DSLContext;

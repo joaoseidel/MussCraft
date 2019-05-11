@@ -3,7 +3,7 @@ package com.musscraft.controllers.mussPlayer.listeners;
 import com.musscraft.Main;
 import com.musscraft.controllers.mussPlayer.MussPlayerController;
 import com.musscraft.controllers.mussPlayer.MussPlayerManager;
-import com.musscraft.controllers.mussPlayer.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.repositories.models.MussPlayer;
 import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +26,7 @@ public class MussPlayerQuitListener implements Listener {
         e.setQuitMessage("");
 
         Player player = e.getPlayer();
-        MussPlayer mussPlayer = mussPlayerManager.findMussPlayerByPlayer(player);
+        MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player);
 
         if (mussPlayer.isLogged() && mussPlayer.isRegistered()) {
             mussPlayer.setLogged(false);
