@@ -1,4 +1,4 @@
-package com.musscraft.controllers.mussPlayer.models;
+package com.musscraft.controllers.mussPlayer.repositories.models;
 
 import org.bukkit.Location;
 

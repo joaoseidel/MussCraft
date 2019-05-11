@@ -1,7 +1,7 @@
 package com.musscraft.controllers.mussPlayer;
 
 import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotFoundException;
-import com.musscraft.controllers.mussPlayer.models.MussPlayer;
+import com.musscraft.controllers.mussPlayer.repositories.models.MussPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -10,17 +10,17 @@ import java.util.List;
 public class MussPlayerManager {
     private List<MussPlayer> loggedMussPlayers = new ArrayList<MussPlayer>();
 
-    public MussPlayer findMussPlayerByPlayer(Player player) {
+    public MussPlayer findMussPlayer(Player player) {
         MussPlayer mussPlayer = null;
         try {
-            mussPlayer = findMussPlayerByUsername(player.getName());
+            mussPlayer = findMussPlayer(player.getName());
         } catch (MussPlayerNotFoundException e) {
             e.printStackTrace();
         }
         return mussPlayer;
     }
 
-    public MussPlayer findMussPlayerByUsername(String username) throws MussPlayerNotFoundException {
+    public MussPlayer findMussPlayer(String username) throws MussPlayerNotFoundException {
         for (MussPlayer mussPlayer : loggedMussPlayers) {
             if (mussPlayer.getUsername().equals(username)) {
                 return mussPlayer;
@@ -43,7 +43,7 @@ public class MussPlayerManager {
 
     public void saveOrUpdate(MussPlayer mussPlayer) {
         try {
-            MussPlayer updatableMussPlayer = findMussPlayerByUsername(mussPlayer.getUsername());
+            MussPlayer updatableMussPlayer = findMussPlayer(mussPlayer.getUsername());
             if (updatableMussPlayer.getUsername().length() != 0) {
                 loggedMussPlayers.remove(updatableMussPlayer);
                 loggedMussPlayers.add(mussPlayer);
