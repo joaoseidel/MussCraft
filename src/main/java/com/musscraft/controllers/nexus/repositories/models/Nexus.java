@@ -156,7 +156,7 @@ public class Nexus {
                 Location randomSpawnLocation =
                         LocationUtils.randomLocationWithinRadius(getLocation(), 10);
 
-                generateMonster(random, nexusWorld, randomSpawnLocation).setTarget(monsterTarget);
+                generateMonster(nexusWorld, randomSpawnLocation).setTarget(monsterTarget);
                 nexusWorld.createExplosion(randomSpawnLocation, 0);
             }
         }
