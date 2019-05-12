@@ -3,7 +3,7 @@ package com.musscraft.controllers.mussPlayer.repositories;
 import com.musscraft.Main;
 import com.musscraft.controllers.mussPlayer.repositories.models.MussPlayer;
 import com.musscraft.database.jOOQ.tables.records.MussplayerRecord;
-import com.musscraft.utils.LocationSerializer;
+import com.musscraft.utils.LocationUtils;
 import org.jooq.DSLContext;
 import org.jooq.Result;
 
@@ -84,7 +84,7 @@ public class MussPlayerRepository {
                 .setMoney(record.getMoney())
                 .setExperience(record.getExperience())
                 .setLogged(record.getLogged().intValue() == 1 ? (Boolean.TRUE) : (Boolean.FALSE))
-                .setLocation(LocationSerializer.getDeserializedLocation(record.getLocation()));
+                .setLocation(LocationUtils.getDeserializedLocation(record.getLocation()));
     }
 
     private MussplayerRecord fillMussPlayer(MussplayerRecord mussplayerRecord, MussPlayer mussPlayer) {
@@ -94,7 +94,7 @@ public class MussPlayerRepository {
         mussplayerRecord.setEmail(mussPlayer.getEmail());
         mussplayerRecord.setMoney(mussPlayer.getMoney());
         mussplayerRecord.setExperience(mussPlayer.getExperience());
-        mussplayerRecord.setLocation(LocationSerializer.serializeLocation(mussPlayer.getLocation()));
+        mussplayerRecord.setLocation(LocationUtils.serializeLocation(mussPlayer.getLocation()));
         mussplayerRecord.setLogged((byte) (mussPlayer.isLogged() ? 1 : 0));
         return mussplayerRecord;
     }

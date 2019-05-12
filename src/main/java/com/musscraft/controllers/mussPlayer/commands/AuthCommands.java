@@ -9,9 +9,7 @@ import com.musscraft.utils.PasswordUtils;
 import io.github.mrblobman.spigotcommandlib.CommandHandle;
 import io.github.mrblobman.spigotcommandlib.CommandHandler;
 import io.github.mrblobman.spigotcommandlib.args.ArgDescription;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public class AuthCommands implements CommandHandler {
@@ -45,7 +43,7 @@ public class AuthCommands implements CommandHandler {
             return;
         }
 
-        doLoginSpawn(mussPlayer, player);
+        mussPlayer.removeLoginScreen();
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&bLogado com sucesso!")
         );
@@ -73,8 +71,10 @@ public class AuthCommands implements CommandHandler {
         }
 
         MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player);
-        registerMussPlayer(mussPlayer, password, email);
-        doLoginSpawn(mussPlayer, player);
+        mussPlayer.populateDefault(true, true);
+        mussPlayerRepository.add(mussPlayer);
+        mussPlayerManager.saveOrUpdate(mussPlayer);
+        mussPlayer.removeLoginScreen();
 
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&aVocê se registrou com sucesso!")
@@ -92,7 +92,9 @@ public class AuthCommands implements CommandHandler {
             String newPassword) {
         try {
             MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player.getName());
-            changeMussPlayerPassword(mussPlayer, oldPassword, newPassword);
+            mussPlayer.changePassword(oldPassword, newPassword);
+            mussPlayerManager.saveOrUpdate(mussPlayer);
+            mussPlayerRepository.saveOrUpdate(mussPlayer);
         } catch (Exception e) {
             player.sendMessage(e.getMessage());
             return;
@@ -103,49 +105,13 @@ public class AuthCommands implements CommandHandler {
         );
     }
 
-    private void registerMussPlayer(MussPlayer mussPlayer, String password, String email) {
-        mussPlayer.setPassword(PasswordUtils.hashPassword(password));
-        mussPlayer.setEmail(email);
-        mussPlayer.setMoney(30.0);
-        mussPlayer.setExperience(0.0);
-        mussPlayer.setLogged(true);
-        mussPlayer.setRegistered(true);
-        mussPlayer.setLocation(Bukkit.getWorld("world").getSpawnLocation());
-
-        mussPlayerRepository.add(mussPlayer);
-        mussPlayerManager.saveOrUpdate(mussPlayer);
-    }
-
     private boolean attempLogin(MussPlayer mussPlayer, String password) {
         if (PasswordUtils.comparePassword(password, mussPlayer.getPassword())) {
             mussPlayer.setLogged(true);
-            mussPlayer.setRegistered(true);
-            mussPlayerManager.saveOrUpdate(mussPlayer);
             mussPlayerRepository.saveOrUpdate(mussPlayer);
+            mussPlayerManager.saveOrUpdate(mussPlayer);
             return true;
         }
         return false;
-    }
-
-    private void changeMussPlayerPassword(MussPlayer mussPlayer, String oldPassword, String newPassword) throws Exception {
-        if (!PasswordUtils.comparePassword(oldPassword, mussPlayer.getPassword())) {
-            throw new Exception("A senha antiga digitada não confere com sua senha atual.");
-        }
-
-        if (PasswordUtils.comparePassword(newPassword, mussPlayer.getPassword())) {
-            throw new Exception("A senha nova digitada é igual a antiga.");
-        }
-
-        mussPlayer.setPassword(PasswordUtils.hashPassword(newPassword));
-        mussPlayerManager.saveOrUpdate(mussPlayer);
-        mussPlayerRepository.saveOrUpdate(mussPlayer);
-    }
-
-    private void doLoginSpawn(MussPlayer mussPlayer, Player player) {
-        player.setAllowFlight(false);
-        player.setFlying(false);
-        player.setGameMode(GameMode.SURVIVAL);
-        player.teleport(mussPlayer.getLocation());
-        Bukkit.getOnlinePlayers().forEach(p -> player.showPlayer(plugin, p));
     }
 }

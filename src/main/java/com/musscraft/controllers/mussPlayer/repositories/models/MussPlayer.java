@@ -1,11 +1,17 @@
 package com.musscraft.controllers.mussPlayer.repositories.models;
 
+import com.musscraft.Main;
+import com.musscraft.utils.PasswordUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
 public class MussPlayer {
     private UUID uid;
+    private Player player;
     private String username;
     private String password;
     private String email;
@@ -102,6 +108,61 @@ public class MussPlayer {
     public MussPlayer setLocation(Location location) {
         this.location = location;
         return this;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public MussPlayer setPlayer(Player player) {
+        this.player = player;
+        return this;
+    }
+
+    public void prepareLoginScreen() {
+        Player player = getPlayer();
+
+        player.setAllowFlight(true);
+        player.setFlying(true);
+        player.teleport(
+                new Location(
+                        player.getWorld(),
+                        0.0,
+                        1000.0,
+                        0.0
+                )
+        );
+    }
+
+    public void removeLoginScreen() {
+        Player player = getPlayer();
+
+        player.setAllowFlight(false);
+        player.setFlying(false);
+        player.setGameMode(GameMode.SURVIVAL);
+        player.teleport(getLocation());
+    }
+
+    public void populateDefault(boolean logged, boolean registered){
+        setPassword(PasswordUtils.hashPassword(password));
+        setEmail(email);
+        setMoney(30.0);
+        setExperience(0.0);
+        setLogged(logged);
+        setRegistered(registered);
+        setLocation(Bukkit.getWorld("world").getSpawnLocation());
+    }
+
+    public void changePassword(String oldPassword, String newPassword) throws Exception {
+        if (!PasswordUtils.comparePassword(oldPassword, getPassword())) {
+            throw new Exception("A senha antiga digitada não confere com sua senha atual.");
+        }
+
+        if (PasswordUtils.comparePassword(newPassword, getPassword())) {
+            throw new Exception("A senha nova digitada é igual a antiga.");
+        }
+
+        setPassword(PasswordUtils.hashPassword(newPassword));
     }
 
     @Override
