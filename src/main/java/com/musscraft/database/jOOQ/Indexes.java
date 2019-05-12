@@ -5,6 +5,7 @@ package com.musscraft.database.jOOQ;
 
 
 import com.musscraft.database.jOOQ.tables.Mussplayer;
+import com.musscraft.database.jOOQ.tables.Nexus;
 
 import javax.annotation.Generated;
 
@@ -33,6 +34,9 @@ public class Indexes {
     public static final Index MUSSPLAYER_MUSSPLAYER_UID_UINDEX = Indexes0.MUSSPLAYER_MUSSPLAYER_UID_UINDEX;
     public static final Index MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = Indexes0.MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX;
     public static final Index MUSSPLAYER_PRIMARY = Indexes0.MUSSPLAYER_PRIMARY;
+    public static final Index NEXUS_NEXUS_CREATOR_UINDEX = Indexes0.NEXUS_NEXUS_CREATOR_UINDEX;
+    public static final Index NEXUS_NEXUS_UID_UINDEX = Indexes0.NEXUS_NEXUS_UID_UINDEX;
+    public static final Index NEXUS_PRIMARY = Indexes0.NEXUS_PRIMARY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -42,5 +46,8 @@ public class Indexes {
         public static Index MUSSPLAYER_MUSSPLAYER_UID_UINDEX = Internal.createIndex("MussPlayer_UID_uindex", Mussplayer.MUSSPLAYER, new OrderField[] { Mussplayer.MUSSPLAYER.UID }, true);
         public static Index MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = Internal.createIndex("MussPlayer_username_uindex", Mussplayer.MUSSPLAYER, new OrderField[] { Mussplayer.MUSSPLAYER.USERNAME }, true);
         public static Index MUSSPLAYER_PRIMARY = Internal.createIndex("PRIMARY", Mussplayer.MUSSPLAYER, new OrderField[] { Mussplayer.MUSSPLAYER.UID }, true);
+        public static Index NEXUS_NEXUS_CREATOR_UINDEX = Internal.createIndex("Nexus_creator_uindex", Nexus.NEXUS, new OrderField[] { Nexus.NEXUS.CREATORUID }, true);
+        public static Index NEXUS_NEXUS_UID_UINDEX = Internal.createIndex("Nexus_uid_uindex", Nexus.NEXUS, new OrderField[] { Nexus.NEXUS.UID }, true);
+        public static Index NEXUS_PRIMARY = Internal.createIndex("PRIMARY", Nexus.NEXUS, new OrderField[] { Nexus.NEXUS.UID }, true);
     }
 }

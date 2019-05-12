@@ -5,6 +5,7 @@ package com.musscraft.database.jOOQ;
 
 
 import com.musscraft.database.jOOQ.tables.Mussplayer;
+import com.musscraft.database.jOOQ.tables.Nexus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Musscraft extends SchemaImpl {
 
-    private static final long serialVersionUID = -324237792;
+    private static final long serialVersionUID = -1562723071;
 
     /**
      * The reference instance of <code>MussCraft</code>
@@ -41,6 +42,11 @@ public class Musscraft extends SchemaImpl {
      * The table <code>MussCraft.MussPlayer</code>.
      */
     public final Mussplayer MUSSPLAYER = com.musscraft.database.jOOQ.tables.Mussplayer.MUSSPLAYER;
+
+    /**
+     * The table <code>MussCraft.Nexus</code>.
+     */
+    public final Nexus NEXUS = com.musscraft.database.jOOQ.tables.Nexus.NEXUS;
 
     /**
      * No further instances allowed
@@ -67,6 +73,7 @@ public class Musscraft extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            Mussplayer.MUSSPLAYER);
+            Mussplayer.MUSSPLAYER,
+            Nexus.NEXUS);
     }
 }

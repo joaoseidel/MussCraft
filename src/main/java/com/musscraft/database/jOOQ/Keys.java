@@ -5,10 +5,13 @@ package com.musscraft.database.jOOQ;
 
 
 import com.musscraft.database.jOOQ.tables.Mussplayer;
+import com.musscraft.database.jOOQ.tables.Nexus;
 import com.musscraft.database.jOOQ.tables.records.MussplayerRecord;
+import com.musscraft.database.jOOQ.tables.records.NexusRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.ForeignKey;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
 
@@ -39,11 +42,15 @@ public class Keys {
     public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_PRIMARY = UniqueKeys0.KEY_MUSSPLAYER_PRIMARY;
     public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_MUSSPLAYER_UID_UINDEX = UniqueKeys0.KEY_MUSSPLAYER_MUSSPLAYER_UID_UINDEX;
     public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = UniqueKeys0.KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX;
+    public static final UniqueKey<NexusRecord> KEY_NEXUS_PRIMARY = UniqueKeys0.KEY_NEXUS_PRIMARY;
+    public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_UID_UINDEX = UniqueKeys0.KEY_NEXUS_NEXUS_UID_UINDEX;
+    public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_CREATOR_UINDEX = UniqueKeys0.KEY_NEXUS_NEXUS_CREATOR_UINDEX;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<NexusRecord, MussplayerRecord> NEXUS_MUSSPLAYER_UID_FK = ForeignKeys0.NEXUS_MUSSPLAYER_UID_FK;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -53,5 +60,12 @@ public class Keys {
         public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_PRIMARY = Internal.createUniqueKey(Mussplayer.MUSSPLAYER, "KEY_MussPlayer_PRIMARY", Mussplayer.MUSSPLAYER.UID);
         public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_MUSSPLAYER_UID_UINDEX = Internal.createUniqueKey(Mussplayer.MUSSPLAYER, "KEY_MussPlayer_MussPlayer_UID_uindex", Mussplayer.MUSSPLAYER.UID);
         public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = Internal.createUniqueKey(Mussplayer.MUSSPLAYER, "KEY_MussPlayer_MussPlayer_username_uindex", Mussplayer.MUSSPLAYER.USERNAME);
+        public static final UniqueKey<NexusRecord> KEY_NEXUS_PRIMARY = Internal.createUniqueKey(Nexus.NEXUS, "KEY_Nexus_PRIMARY", Nexus.NEXUS.UID);
+        public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_UID_UINDEX = Internal.createUniqueKey(Nexus.NEXUS, "KEY_Nexus_Nexus_uid_uindex", Nexus.NEXUS.UID);
+        public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_CREATOR_UINDEX = Internal.createUniqueKey(Nexus.NEXUS, "KEY_Nexus_Nexus_creator_uindex", Nexus.NEXUS.CREATORUID);
+    }
+
+    private static class ForeignKeys0 {
+        public static final ForeignKey<NexusRecord, MussplayerRecord> NEXUS_MUSSPLAYER_UID_FK = Internal.createForeignKey(com.musscraft.database.jOOQ.Keys.KEY_MUSSPLAYER_PRIMARY, Nexus.NEXUS, "Nexus_MussPlayer_UID_fk", Nexus.NEXUS.CREATORUID);
     }
 }

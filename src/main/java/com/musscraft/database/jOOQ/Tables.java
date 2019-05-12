@@ -5,6 +5,7 @@ package com.musscraft.database.jOOQ;
 
 
 import com.musscraft.database.jOOQ.tables.Mussplayer;
+import com.musscraft.database.jOOQ.tables.Nexus;
 
 import javax.annotation.Generated;
 
@@ -26,4 +27,9 @@ public class Tables {
      * The table <code>MussCraft.MussPlayer</code>.
      */
     public static final Mussplayer MUSSPLAYER = com.musscraft.database.jOOQ.tables.Mussplayer.MUSSPLAYER;
+
+    /**
+     * The table <code>MussCraft.Nexus</code>.
+     */
+    public static final Nexus NEXUS = com.musscraft.database.jOOQ.tables.Nexus.NEXUS;
 }
