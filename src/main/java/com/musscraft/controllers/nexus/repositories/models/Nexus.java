@@ -162,7 +162,9 @@ public class Nexus {
         }
     }
 
-    private Creature generateMonster(Random random, World nexusWorld, Location randomSpawnLocation) {
+    private Creature generateMonster(World nexusWorld, Location randomSpawnLocation) {
+        Random random = new Random();
+
         Creature monster = (Creature) nexusWorld.spawnEntity(
                 randomSpawnLocation,
                 monstersType.get(random.nextInt(monstersType.size()))
