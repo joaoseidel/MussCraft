@@ -3,6 +3,7 @@ package com.musscraft.controllers.mussPlayer.commands;
 import com.musscraft.Main;
 import com.musscraft.controllers.mussPlayer.MussPlayerController;
 import com.musscraft.controllers.mussPlayer.MussPlayerManager;
+import com.musscraft.controllers.mussPlayer.exceptions.MussPlayerNotFoundException;
 import com.musscraft.controllers.mussPlayer.repositories.MussPlayerRepository;
 import com.musscraft.controllers.mussPlayer.repositories.models.MussPlayer;
 import com.musscraft.utils.PasswordUtils;
@@ -13,12 +14,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class AuthCommands implements CommandHandler {
-    private Main plugin;
     private MussPlayerManager mussPlayerManager;
     private MussPlayerRepository mussPlayerRepository;
 
     public AuthCommands(Main plugin) {
-        this.plugin = plugin;
         MussPlayerController mussPlayerController = plugin.getMussPlayerController();
         this.mussPlayerManager = mussPlayerController.getMussPlayerManager();
         this.mussPlayerRepository = mussPlayerController.getMussPlayerRepository();
@@ -35,15 +34,19 @@ public class AuthCommands implements CommandHandler {
                     name = "Senha",
                     description = "Sua senha de login"
             ) String password
-    ) {
-        MussPlayer mussPlayer = mussPlayerRepository.get(player.getName());
+    ) throws MussPlayerNotFoundException {
+        mussPlayerManager.remove(mussPlayerManager.findMussPlayer(player.getName()));
+        MussPlayer mussPlayer = mussPlayerRepository.get(player.getName()).setPlayer(player);
 
-        if (!attempLogin(mussPlayer, password)) {
+        if (!PasswordUtils.comparePassword(password, mussPlayer.getPassword())) {
             player.sendMessage("Senha errada!");
             return;
         }
 
-        mussPlayer.removeLoginScreen();
+        mussPlayer = mussPlayer.removeLoginScreen();
+        mussPlayerRepository.saveOrUpdate(mussPlayer);
+        mussPlayerManager.saveOrUpdate(mussPlayer);
+
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&bLogado com sucesso!")
         );
@@ -70,11 +73,11 @@ public class AuthCommands implements CommandHandler {
             return;
         }
 
-        MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player);
-        mussPlayer.populateDefault(true, true);
+        MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player)
+                .populateDefault(true, true)
+                .removeLoginScreen();
         mussPlayerRepository.add(mussPlayer);
         mussPlayerManager.saveOrUpdate(mussPlayer);
-        mussPlayer.removeLoginScreen();
 
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&aVocê se registrou com sucesso!")
@@ -91,8 +94,8 @@ public class AuthCommands implements CommandHandler {
             String oldPassword,
             String newPassword) {
         try {
-            MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player.getName());
-            mussPlayer.changePassword(oldPassword, newPassword);
+            MussPlayer mussPlayer = mussPlayerManager.findMussPlayer(player.getName())
+                    .changePassword(oldPassword, newPassword);
             mussPlayerManager.saveOrUpdate(mussPlayer);
             mussPlayerRepository.saveOrUpdate(mussPlayer);
         } catch (Exception e) {
@@ -103,15 +106,5 @@ public class AuthCommands implements CommandHandler {
         player.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "&bVocê alterou sua senha com sucesso.")
         );
-    }
-
-    private boolean attempLogin(MussPlayer mussPlayer, String password) {
-        if (PasswordUtils.comparePassword(password, mussPlayer.getPassword())) {
-            mussPlayer.setLogged(true);
-            mussPlayerRepository.saveOrUpdate(mussPlayer);
-            mussPlayerManager.saveOrUpdate(mussPlayer);
-            return true;
-        }
-        return false;
     }
 }

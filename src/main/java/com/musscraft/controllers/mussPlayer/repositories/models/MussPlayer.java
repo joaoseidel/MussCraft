@@ -134,16 +134,19 @@ public class MussPlayer {
         );
     }
 
-    public void removeLoginScreen() {
+    public MussPlayer removeLoginScreen() {
         Player player = getPlayer();
 
+        setRegistered(true);
+        setLogged(true);
         player.setAllowFlight(false);
         player.setFlying(false);
         player.setGameMode(GameMode.SURVIVAL);
         player.teleport(getLocation());
+        return this;
     }
 
-    public void populateDefault(boolean logged, boolean registered){
+    public MussPlayer populateDefault(boolean logged, boolean registered){
         setPassword(PasswordUtils.hashPassword(password));
         setEmail(email);
         setMoney(30.0);
@@ -151,9 +154,10 @@ public class MussPlayer {
         setLogged(logged);
         setRegistered(registered);
         setLocation(Bukkit.getWorld("world").getSpawnLocation());
+        return this;
     }
 
-    public void changePassword(String oldPassword, String newPassword) throws Exception {
+    public MussPlayer changePassword(String oldPassword, String newPassword) throws Exception {
         if (!PasswordUtils.comparePassword(oldPassword, getPassword())) {
             throw new Exception("A senha antiga digitada não confere com sua senha atual.");
         }
@@ -163,6 +167,7 @@ public class MussPlayer {
         }
 
         setPassword(PasswordUtils.hashPassword(newPassword));
+        return this;
     }
 
     @Override

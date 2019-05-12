@@ -27,7 +27,7 @@ public class MussPlayerJoinListener implements Listener {
         e.setJoinMessage("");
         Player player = e.getPlayer();
 
-        MussPlayer mussPlayer = new MussPlayer(player.getName());
+        MussPlayer mussPlayer = new MussPlayer(player.getName()).setPlayer(player);
         mussPlayer.prepareLoginScreen();
         mussPlayerManager.add(mussPlayer);
 
@@ -37,8 +37,7 @@ public class MussPlayerJoinListener implements Listener {
             return;
         }
 
-        player.sendMessage(translateAlternateColorCodes('&', "&aUse /login <senha>"));
+        player.sendMessage(translateAlternateColorCodes('&', "&aUse /logar <senha>"));
         mussPlayer.setRegistered(true);
-        mussPlayerManager.add(mussPlayer);
     }
 }
