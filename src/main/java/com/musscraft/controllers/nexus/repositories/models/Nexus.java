@@ -180,7 +180,7 @@ public class Nexus {
         );
 
         minion.setCustomName(
-                ChatColor.translateAlternateColorCodes('&', "&c" + getName())
+                ChatColor.translateAlternateColorCodes('&', "&c" + getName() + " minion")
         );
         minion.setCustomNameVisible(true);
         minion.setCanPickupItems(false);
