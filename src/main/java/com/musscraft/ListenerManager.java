@@ -3,6 +3,7 @@ package com.musscraft;
 import com.musscraft.controllers.mussPlayer.listeners.MussPlayerJoinListener;
 import com.musscraft.controllers.mussPlayer.listeners.MussPlayerMoveListener;
 import com.musscraft.controllers.mussPlayer.listeners.MussPlayerQuitListener;
+import com.musscraft.controllers.nexus.listeners.OnNexusSpawnedMonstersDeath;
 import com.musscraft.controllers.nexus.listeners.OnPlayerInteractWithNexus;
 import com.musscraft.controllers.nexus.listeners.OnPlayerMoveNearToNexus;
 import org.bukkit.event.HandlerList;
@@ -27,6 +28,7 @@ public class ListenerManager {
     public void registerNexusListeners() {
         pluginManager.registerEvents(new OnPlayerInteractWithNexus(plugin), plugin);
         pluginManager.registerEvents(new OnPlayerMoveNearToNexus(plugin), plugin);
+        pluginManager.registerEvents(new OnNexusSpawnedMonstersDeath(plugin), plugin);
     }
 
     public void unregisterAll() {

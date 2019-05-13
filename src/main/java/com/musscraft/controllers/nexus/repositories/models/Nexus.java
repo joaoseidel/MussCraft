@@ -128,12 +128,21 @@ public class Nexus {
         return this;
     }
 
+    public List<Entity> getSpawnedMonsters() {
+        return spawnedMonsters;
+    }
+
+    public Nexus setSpawnedMonsters(List<Entity> spawnedMonsters) {
+        this.spawnedMonsters = spawnedMonsters;
+        return this;
+    }
+
     public void clearSpawnedMonsters() {
-        if (spawnedMonsters.isEmpty())
+        if (getSpawnedMonsters().isEmpty())
             return;
 
-        spawnedMonsters.forEach(Entity::remove);
-        spawnedMonsters.clear();
+        getSpawnedMonsters().forEach(Entity::remove);
+        getSpawnedMonsters().clear();
     }
 
     public void hit() {
@@ -174,7 +183,9 @@ public class Nexus {
                 ChatColor.translateAlternateColorCodes('&', "&c" + getName())
         );
         monster.setCustomNameVisible(true);
-        spawnedMonsters.add(monster);
+        monster.setCanPickupItems(false);
+        monster.setLootTable(null);
+        getSpawnedMonsters().add(monster);
         return monster;
     }
 
@@ -196,7 +207,7 @@ public class Nexus {
         BossBar bossBar = getBossBar();
 
         final double maxBarbossPercentual = 1.0;
-        Double finalHealth = (maxBarbossPercentual * getHealth()) / 100;
+        double finalHealth = (maxBarbossPercentual * getHealth()) / 100;
 
         if (bossBar.getPlayers().contains(player)) {
             bossBar.setProgress(finalHealth);
