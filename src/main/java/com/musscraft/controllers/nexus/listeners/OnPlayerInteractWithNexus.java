@@ -13,7 +13,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 
-import static org.bukkit.ChatColor.translateAlternateColorCodes;
 import static org.bukkit.potion.PotionEffectType.WEAKNESS;
 
 public class OnPlayerInteractWithNexus implements Listener {
@@ -33,11 +32,7 @@ public class OnPlayerInteractWithNexus implements Listener {
             Location nexusLocation = e.getClickedBlock().getLocation();
             Nexus nexus = nexusManager.findNexus(nexusLocation);
 
-            if (nexus.isDestroyed()) {
-                player.sendMessage(translateAlternateColorCodes('&', "&4O nexus está em ruínas!"));
-                return;
-            }
-
+            if (nexus.isDestroyed()) return;
             if (!player.getActivePotionEffects().contains(WEAKNESS)) player.addPotionEffect(
                     new PotionEffect(WEAKNESS, 100, 1)
             );
@@ -45,6 +40,9 @@ public class OnPlayerInteractWithNexus implements Listener {
             nexus.hit();
             nexus.spawnMinions(player, 10, 2, 10);
             nexus.showHealth(player);
+            if (nexus.getHealth() <= 0.0) {
+                nexus.destroy();
+            }
             nexusManager.saveOrUpdate(nexus);
         }
     }

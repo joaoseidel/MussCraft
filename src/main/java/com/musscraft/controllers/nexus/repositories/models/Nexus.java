@@ -26,6 +26,7 @@ public class Nexus {
     private Date destroyedDate;
     private Location location;
     private BossBar bossBar;
+    private boolean destroyed;
     private List<Entity> minions = new ArrayList<>();
 
     private static final List<EntityType> minionsType = Arrays.asList(
@@ -152,7 +153,7 @@ public class Nexus {
         double damage = damagePower <= 0.1 ? (0.1) : (damagePower);
         double finalHealth = health - damage;
 
-        setHealth(finalHealth <= 0.0 ? (0) : (finalHealth));
+        setHealth(finalHealth <= 0.0 ? (0.0) : (finalHealth));
     }
 
     public void spawnMinions(Player minionAttackTarget, int chance, int minimum, int maximum) {
@@ -190,18 +191,21 @@ public class Nexus {
         return minion;
     }
 
+    public void destroy() {
+        setDestroyedDate(new Date());
+        setHealth(0.0);
+        clearMinions();
+        getBossBar().removeAll();
+        setDestroyed(true);
+    }
+
     public boolean isDestroyed() {
-        if (getHealth() <= 0) {
-            BossBar bossBar = getBossBar();
+        return destroyed;
+    }
 
-            setDestroyedDate(new Date());
-            getLocation().getWorld().createExplosion(location, 0);
-            clearMinions();
-            bossBar.removeAll();
-            return true;
-        }
-
-        return false;
+    public Nexus setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+        return this;
     }
 
     public void showHealth(Player player) {
