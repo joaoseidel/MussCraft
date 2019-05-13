@@ -10,27 +10,28 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 import java.util.List;
 
-public class OnNexusSpawnedMonstersDeath implements Listener {
+public class OnNexusMinionDeath implements Listener {
     private NexusManager nexusManager;
 
-    public OnNexusSpawnedMonstersDeath(Main plugin) {
+    public OnNexusMinionDeath(Main plugin) {
         this.nexusManager = plugin.getNexusController(plugin).getNexusManager();
     }
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent e) {
-        List<Nexus> nexusWithSpawnedMonsters = nexusManager.findNexusWithSpawnedMonsters();
-        if (nexusWithSpawnedMonsters.isEmpty())
+        List<Nexus> nexusWithSpawnedMinions = nexusManager.findNexusWithSpawnedMinions();
+        if (nexusWithSpawnedMinions.isEmpty())
             return;
 
-        nexusWithSpawnedMonsters.forEach(nexus -> {
-            List<Entity> monsters = nexus.getSpawnedMonsters();
-            Entity deadEntity = e.getEntity();
-            if (monsters.contains(deadEntity)) {
+        nexusWithSpawnedMinions.forEach(nexus -> {
+            List<Entity> minions = nexus.getMinions();
+            Entity deadMinionEntity = e.getEntity();
+
+            if (minions.contains(deadMinionEntity)) {
                 e.getDrops().clear();
                 e.setDroppedExp(0);
 
-                nexus.getSpawnedMonsters().remove(deadEntity);
+                nexus.getMinions().remove(deadMinionEntity);
                 nexusManager.saveOrUpdate(nexus);
             }
         });

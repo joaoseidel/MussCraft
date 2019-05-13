@@ -39,14 +39,14 @@ public class NexusManager {
         throw new NexusDoesntExistsException();
     }
 
-    public List<Nexus> findNexusWithSpawnedMonsters() {
-        List<Nexus> nexusWithSpawnedMonsters = new ArrayList<>();
+    public List<Nexus> findNexusWithSpawnedMinions() {
+        List<Nexus> nexusWithSpawnedMinions = new ArrayList<>();
         nexusList.forEach(nexus -> {
-            if (!nexus.getSpawnedMonsters().isEmpty())
-                nexusWithSpawnedMonsters.add(nexus);
+            if (!nexus.getMinions().isEmpty())
+                nexusWithSpawnedMinions.add(nexus);
         });
 
-        return nexusWithSpawnedMonsters;
+        return nexusWithSpawnedMinions;
     }
 
     public List<Nexus> listAll() {

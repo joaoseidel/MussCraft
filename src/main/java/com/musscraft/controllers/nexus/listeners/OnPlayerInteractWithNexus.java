@@ -43,7 +43,7 @@ public class OnPlayerInteractWithNexus implements Listener {
             );
 
             nexus.hit();
-            nexus.spawnMonsters(player, 10, 2, 10);
+            nexus.spawnMinions(player, 10, 2, 10);
             nexus.showHealth(player);
             nexusManager.saveOrUpdate(nexus);
         }

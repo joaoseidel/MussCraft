@@ -26,9 +26,9 @@ public class Nexus {
     private Date destroyedDate;
     private Location location;
     private BossBar bossBar;
-    private List<Entity> spawnedMonsters = new ArrayList<>();
+    private List<Entity> minions = new ArrayList<>();
 
-    private static final List<EntityType> monstersType = Arrays.asList(
+    private static final List<EntityType> minionsType = Arrays.asList(
             EntityType.BLAZE, EntityType.ZOMBIE, EntityType.SKELETON,
             EntityType.SPIDER, EntityType.PIG_ZOMBIE
     );
@@ -128,21 +128,21 @@ public class Nexus {
         return this;
     }
 
-    public List<Entity> getSpawnedMonsters() {
-        return spawnedMonsters;
+    public List<Entity> getMinions() {
+        return minions;
     }
 
-    public Nexus setSpawnedMonsters(List<Entity> spawnedMonsters) {
-        this.spawnedMonsters = spawnedMonsters;
+    public Nexus setMinions(List<Entity> minions) {
+        this.minions = minions;
         return this;
     }
 
-    public void clearSpawnedMonsters() {
-        if (getSpawnedMonsters().isEmpty())
+    public void clearMinions() {
+        if (getMinions().isEmpty())
             return;
 
-        getSpawnedMonsters().forEach(Entity::remove);
-        getSpawnedMonsters().clear();
+        getMinions().forEach(Entity::remove);
+        getMinions().clear();
     }
 
     public void hit() {
@@ -155,38 +155,39 @@ public class Nexus {
         setHealth(finalHealth <= 0.0 ? (0) : (finalHealth));
     }
 
-    public void spawnMonsters(Player monsterTarget, int chance, int minimum, int maximum) {
+    public void spawnMinions(Player minionAttackTarget, int chance, int minimum, int maximum) {
         Random random = new Random();
-        boolean isTimeToSpawnMonsters = random.nextInt(99) + 1 <= chance;
+        boolean isTimeToSpawnMinions = random.nextInt(99) + 1 <= chance;
 
-        if (isTimeToSpawnMonsters) {
-            for (int i = 0; i < random.nextInt(minimum + maximum); i++) {
+        if (isTimeToSpawnMinions) {
+            for (int i = 0; i < random.nextInt(maximum) + minimum; i++) {
                 World nexusWorld = getLocation().getWorld();
                 Location randomSpawnLocation =
                         LocationUtils.randomLocationWithinRadius(getLocation(), 10);
 
-                generateMonster(nexusWorld, randomSpawnLocation).setTarget(monsterTarget);
+                generateMinions(nexusWorld, randomSpawnLocation).setTarget(minionAttackTarget);
                 nexusWorld.createExplosion(randomSpawnLocation, 0);
             }
         }
     }
 
-    private Creature generateMonster(World nexusWorld, Location randomSpawnLocation) {
+    private Creature generateMinions(World nexusWorld, Location randomSpawnLocation) {
         Random random = new Random();
 
-        Creature monster = (Creature) nexusWorld.spawnEntity(
+        Creature minion = (Creature) nexusWorld.spawnEntity(
                 randomSpawnLocation,
-                monstersType.get(random.nextInt(monstersType.size()))
+                minionsType.get(random.nextInt(minionsType.size()))
         );
 
-        monster.setCustomName(
+        minion.setCustomName(
                 ChatColor.translateAlternateColorCodes('&', "&c" + getName())
         );
-        monster.setCustomNameVisible(true);
-        monster.setCanPickupItems(false);
-        monster.setLootTable(null);
-        getSpawnedMonsters().add(monster);
-        return monster;
+        minion.setCustomNameVisible(true);
+        minion.setCanPickupItems(false);
+        minion.setLootTable(null);
+
+        getMinions().add(minion);
+        return minion;
     }
 
     public boolean isDestroyed() {
@@ -195,7 +196,7 @@ public class Nexus {
 
             setDestroyedDate(new Date());
             getLocation().getWorld().createExplosion(location, 0);
-            clearSpawnedMonsters();
+            clearMinions();
             bossBar.removeAll();
             return true;
         }
