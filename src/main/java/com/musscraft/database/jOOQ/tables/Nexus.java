@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Nexus extends TableImpl<NexusRecord> {
 
-    private static final long serialVersionUID = -449604755;
+    private static final long serialVersionUID = -1914058051;
 
     /**
      * The reference instance of <code>MussCraft.Nexus</code>
@@ -137,7 +137,7 @@ public class Nexus extends TableImpl<NexusRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.NEXUS_NEXUS_CREATOR_UINDEX, Indexes.NEXUS_NEXUS_UID_UINDEX, Indexes.NEXUS_PRIMARY);
+        return Arrays.<Index>asList(Indexes.NEXUS_NEXUS_CREATORUID_UINDEX, Indexes.NEXUS_NEXUS_UID_UINDEX, Indexes.NEXUS_PRIMARY);
     }
 
     /**
@@ -153,7 +153,7 @@ public class Nexus extends TableImpl<NexusRecord> {
      */
     @Override
     public List<UniqueKey<NexusRecord>> getKeys() {
-        return Arrays.<UniqueKey<NexusRecord>>asList(Keys.KEY_NEXUS_PRIMARY, Keys.KEY_NEXUS_NEXUS_UID_UINDEX, Keys.KEY_NEXUS_NEXUS_CREATOR_UINDEX);
+        return Arrays.<UniqueKey<NexusRecord>>asList(Keys.KEY_NEXUS_PRIMARY, Keys.KEY_NEXUS_NEXUS_UID_UINDEX, Keys.KEY_NEXUS_NEXUS_CREATORUID_UINDEX);
     }
 
     /**

@@ -44,7 +44,7 @@ public class Keys {
     public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = UniqueKeys0.KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX;
     public static final UniqueKey<NexusRecord> KEY_NEXUS_PRIMARY = UniqueKeys0.KEY_NEXUS_PRIMARY;
     public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_UID_UINDEX = UniqueKeys0.KEY_NEXUS_NEXUS_UID_UINDEX;
-    public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_CREATOR_UINDEX = UniqueKeys0.KEY_NEXUS_NEXUS_CREATOR_UINDEX;
+    public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_CREATORUID_UINDEX = UniqueKeys0.KEY_NEXUS_NEXUS_CREATORUID_UINDEX;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -62,7 +62,7 @@ public class Keys {
         public static final UniqueKey<MussplayerRecord> KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = Internal.createUniqueKey(Mussplayer.MUSSPLAYER, "KEY_MussPlayer_MussPlayer_username_uindex", Mussplayer.MUSSPLAYER.USERNAME);
         public static final UniqueKey<NexusRecord> KEY_NEXUS_PRIMARY = Internal.createUniqueKey(Nexus.NEXUS, "KEY_Nexus_PRIMARY", Nexus.NEXUS.UID);
         public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_UID_UINDEX = Internal.createUniqueKey(Nexus.NEXUS, "KEY_Nexus_Nexus_uid_uindex", Nexus.NEXUS.UID);
-        public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_CREATOR_UINDEX = Internal.createUniqueKey(Nexus.NEXUS, "KEY_Nexus_Nexus_creator_uindex", Nexus.NEXUS.CREATORUID);
+        public static final UniqueKey<NexusRecord> KEY_NEXUS_NEXUS_CREATORUID_UINDEX = Internal.createUniqueKey(Nexus.NEXUS, "KEY_Nexus_Nexus_creatorUid_uindex", Nexus.NEXUS.CREATORUID);
     }
 
     private static class ForeignKeys0 {
