@@ -31,10 +31,12 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
+    public static final Index MUSSPLAYER_MUSSPLAYER_EMAIL_UINDEX = Indexes0.MUSSPLAYER_MUSSPLAYER_EMAIL_UINDEX;
     public static final Index MUSSPLAYER_MUSSPLAYER_UID_UINDEX = Indexes0.MUSSPLAYER_MUSSPLAYER_UID_UINDEX;
     public static final Index MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = Indexes0.MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX;
     public static final Index MUSSPLAYER_PRIMARY = Indexes0.MUSSPLAYER_PRIMARY;
     public static final Index NEXUS_NEXUS_CREATORUID_UINDEX = Indexes0.NEXUS_NEXUS_CREATORUID_UINDEX;
+    public static final Index NEXUS_NEXUS_NAME_UINDEX = Indexes0.NEXUS_NEXUS_NAME_UINDEX;
     public static final Index NEXUS_NEXUS_UID_UINDEX = Indexes0.NEXUS_NEXUS_UID_UINDEX;
     public static final Index NEXUS_PRIMARY = Indexes0.NEXUS_PRIMARY;
 
@@ -43,10 +45,12 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
+        public static Index MUSSPLAYER_MUSSPLAYER_EMAIL_UINDEX = Internal.createIndex("MussPlayer_email_uindex", Mussplayer.MUSSPLAYER, new OrderField[] { Mussplayer.MUSSPLAYER.EMAIL }, true);
         public static Index MUSSPLAYER_MUSSPLAYER_UID_UINDEX = Internal.createIndex("MussPlayer_UID_uindex", Mussplayer.MUSSPLAYER, new OrderField[] { Mussplayer.MUSSPLAYER.UID }, true);
         public static Index MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX = Internal.createIndex("MussPlayer_username_uindex", Mussplayer.MUSSPLAYER, new OrderField[] { Mussplayer.MUSSPLAYER.USERNAME }, true);
         public static Index MUSSPLAYER_PRIMARY = Internal.createIndex("PRIMARY", Mussplayer.MUSSPLAYER, new OrderField[] { Mussplayer.MUSSPLAYER.UID }, true);
         public static Index NEXUS_NEXUS_CREATORUID_UINDEX = Internal.createIndex("Nexus_creatorUid_uindex", Nexus.NEXUS, new OrderField[] { Nexus.NEXUS.CREATORUID }, true);
+        public static Index NEXUS_NEXUS_NAME_UINDEX = Internal.createIndex("Nexus_name_uindex", Nexus.NEXUS, new OrderField[] { Nexus.NEXUS.NAME }, true);
         public static Index NEXUS_NEXUS_UID_UINDEX = Internal.createIndex("Nexus_uid_uindex", Nexus.NEXUS, new OrderField[] { Nexus.NEXUS.UID }, true);
         public static Index NEXUS_PRIMARY = Internal.createIndex("PRIMARY", Nexus.NEXUS, new OrderField[] { Nexus.NEXUS.UID }, true);
     }

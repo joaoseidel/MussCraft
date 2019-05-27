@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mussplayer extends TableImpl<MussplayerRecord> {
 
-    private static final long serialVersionUID = -1223788783;
+    private static final long serialVersionUID = 906364911;
 
     /**
      * The reference instance of <code>MussCraft.MussPlayer</code>
@@ -141,7 +141,7 @@ public class Mussplayer extends TableImpl<MussplayerRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.MUSSPLAYER_MUSSPLAYER_UID_UINDEX, Indexes.MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX, Indexes.MUSSPLAYER_PRIMARY);
+        return Arrays.<Index>asList(Indexes.MUSSPLAYER_MUSSPLAYER_EMAIL_UINDEX, Indexes.MUSSPLAYER_MUSSPLAYER_UID_UINDEX, Indexes.MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX, Indexes.MUSSPLAYER_PRIMARY);
     }
 
     /**
@@ -157,7 +157,7 @@ public class Mussplayer extends TableImpl<MussplayerRecord> {
      */
     @Override
     public List<UniqueKey<MussplayerRecord>> getKeys() {
-        return Arrays.<UniqueKey<MussplayerRecord>>asList(Keys.KEY_MUSSPLAYER_PRIMARY, Keys.KEY_MUSSPLAYER_MUSSPLAYER_UID_UINDEX, Keys.KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX);
+        return Arrays.<UniqueKey<MussplayerRecord>>asList(Keys.KEY_MUSSPLAYER_PRIMARY, Keys.KEY_MUSSPLAYER_MUSSPLAYER_UID_UINDEX, Keys.KEY_MUSSPLAYER_MUSSPLAYER_USERNAME_UINDEX, Keys.KEY_MUSSPLAYER_MUSSPLAYER_EMAIL_UINDEX);
     }
 
     /**
