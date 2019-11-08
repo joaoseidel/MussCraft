@@ -53,11 +53,11 @@ public class Nexus extends AbstractBaseEntity {
         this.health = health;
     }
 
-    public Integer getPower() {
+    public Double getPower() {
         return power;
     }
 
-    public void setPower(Integer power) {
+    public void setPower(Double power) {
         this.power = power;
     }
 
