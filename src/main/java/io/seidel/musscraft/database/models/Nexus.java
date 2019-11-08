@@ -1,7 +1,7 @@
-package io.seidel.musscraft.models;
+package io.seidel.musscraft.database.models;
 
 import com.dieselpoint.norm.serialize.DbSerializer;
-import io.seidel.musscraft.models.serializers.LocationSerializer;
+import io.seidel.musscraft.database.models.serializers.LocationSerializer;
 import org.bukkit.Location;
 import org.bukkit.boss.BossBar;
 

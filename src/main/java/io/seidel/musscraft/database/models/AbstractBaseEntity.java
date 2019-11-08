@@ -1,4 +1,4 @@
-package io.seidel.musscraft.models;
+package io.seidel.musscraft.database.models;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
