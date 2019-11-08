@@ -5,9 +5,11 @@ import models.serializers.LocationSerializer;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+@Entity
 @Table(name = "MussPlayer")
 public class MussPlayer extends AbstractBaseEntity {
 
