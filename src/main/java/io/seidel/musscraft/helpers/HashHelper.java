@@ -1,4 +1,4 @@
-package helpers;
+package io.seidel.musscraft.helpers;
 
 public class HashHelper {
     public static String getHash(String txt, String hashType) {

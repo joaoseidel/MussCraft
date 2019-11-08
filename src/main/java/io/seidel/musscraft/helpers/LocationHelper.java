@@ -1,4 +1,4 @@
-package helpers;
+package io.seidel.musscraft.helpers;
 
 import org.bukkit.Location;
 import org.bukkit.World;

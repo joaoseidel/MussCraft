@@ -1,4 +1,4 @@
-package models.serializers;
+package io.seidel.musscraft.models.serializers;
 
 import com.dieselpoint.norm.serialize.DbSerializable;
 import org.bukkit.Bukkit;
