@@ -18,7 +18,7 @@ public class Nexus extends AbstractBaseEntity {
 
     private Double health;
 
-    private Integer power;
+    private Double power;
 
     private Date destroyedDate;
 
