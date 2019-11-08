@@ -1,5 +1,7 @@
 package models;
 
+import com.dieselpoint.norm.serialize.DbSerializer;
+import models.serializers.LocationSerializer;
 import org.bukkit.Location;
 import org.bukkit.boss.BossBar;
 
@@ -22,6 +24,7 @@ public class Nexus extends AbstractBaseEntity {
 
     private Date destroyedDate;
 
+    @DbSerializer(LocationSerializer.class)
     private Location location;
 
     private MussPlayer owner;
