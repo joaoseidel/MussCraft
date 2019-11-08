@@ -1,7 +1,7 @@
 package io.seidel.musscraft.database.models;
 
 import com.dieselpoint.norm.serialize.DbSerializer;
-import io.seidel.musscraft.database.models.serializers.LocationSerializer;
+import io.seidel.musscraft.database.serializers.LocationSerializer;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
