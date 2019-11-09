@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a0de9169-5449-4fe7-a4b9-2b135627330e" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="GuiceNewModule" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1TGZglsLjZdSP16h40RsCBdTIB2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\João Seidel\IdeaProjects\MussCraft\src\main\java\services" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a0de9169-5449-4fe7-a4b9-2b135627330e" name="Default Changelist" comment="" />
+      <changelist id="" name="Add creationDate and updateDate" comment="" />
+      <created>1573088506236</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573088506236</updated>
+      <workItem from="1573088510695" duration="677000" />
+      <workItem from="1573175097748" duration="4452000" />
+      <workItem from="1573259906607" duration="479000" />
+      <workItem from="1573260415228" duration="6219000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add plugin-annotations dependency&#10;Add N-ORM dependency">
+      <created>1573179297551</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573179297551</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add HashHelper to generate Hashed strings&#10;Add LocationHelper to random location and get nearby blocks">
+      <created>1573179366872</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573179366872</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add LocationSerializer to database serialization">
+      <created>1573179443584</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1573179443584</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add AbstractBaseEntity which provides UUID generation at instance time">
+      <created>1573179721776</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573179721776</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add MussPlayer entity">
+      <created>1573179755696</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1573179755696</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Remove unnecessary .gitkeep file">
+      <created>1573179799549</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1573179799549</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Set language level to 11">
+      <created>1573180250534</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1573180250534</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add Entity annotation to MussPlayer model">
+      <created>1573180278079</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1573180278079</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Add Nexus entity">
+      <created>1573180293976</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1573180293976</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Change power property type to Double">
+      <created>1573180470956</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1573180470957</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Add DbSerializer annotation to Location property">
+      <created>1573180502554</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1573180502554</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Change power property type to Double">
+      <created>1573180530959</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1573180530959</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add creationDate and updateDate">
+      <created>1573321826095</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1573321826095</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Remove .gitkeep">
+      <created>1573321896794</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1573321896794</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add creationDate and updateDate">
+      <created>1573321920704</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1573321920704</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Add Home entity">
+      <created>1573321962100</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1573321962100</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add HomeNotFoundException">
+      <created>1573321981454</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1573321981454</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add HomeRepository">
+      <created>1573322001106</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1573322001106</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Add HomeCreateVO">
+      <created>1573322094033</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1573322094033</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add HomeSearchVO">
+      <created>1573322131750</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1573322131750</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add base HomeService">
+      <created>1573322150935</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1573322150935</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add plugin-annotations dependency&#10;Add N-ORM dependency" />
+    <MESSAGE value="Add HashHelper to generate Hashed strings&#10;Add LocationHelper to random location and get nearby blocks" />
+    <MESSAGE value="Add LocationSerializer to database serialization" />
+    <MESSAGE value="Add AbstractBaseEntity which provides UUID generation at instance time" />
+    <MESSAGE value="Add MussPlayer entity" />
+    <MESSAGE value="Remove unnecessary .gitkeep file" />
+    <MESSAGE value="Set language level to 11" />
+    <MESSAGE value="Add Entity annotation to MussPlayer model" />
+    <MESSAGE value="Add Nexus entity" />
+    <MESSAGE value="Add DbSerializer annotation to Location property" />
+    <MESSAGE value="Change power property type to Double" />
+    <MESSAGE value="Remove .gitkeep" />
+    <MESSAGE value="Add creationDate and updateDate" />
+    <MESSAGE value="Add Home entity" />
+    <MESSAGE value="Add HomeNotFoundException" />
+    <MESSAGE value="Add HomeRepository" />
+    <MESSAGE value="Add HomeCreateVO" />
+    <MESSAGE value="Add HomeSearchVO" />
+    <MESSAGE value="Add base HomeService" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add base HomeService" />
+  </component>
+</project>
